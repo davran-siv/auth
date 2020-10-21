@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common'
-import { arrayToObject } from '../object/object.util'
+import { arrayToObject } from '..'
 import { isArray } from './variable-type.util'
 
 export const validateRecordExistence = (initial: number[] | number, fromDB: { id: number }[], errorTemplate: string): void => {
