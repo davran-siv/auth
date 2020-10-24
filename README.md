@@ -1,38 +1,58 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
 
 [travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
 [travis-url]: https://travis-ci.org/nestjs/nest
 [linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Nest DDD and CQRS boilerplate
 
+## Preparation
+### Add postgres docker container
+```bash
+$ docker run --name postgres -p5432:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_DB=payform -e POSTGRES_USER=root -d postgres:11.5
+$ docker run --name rabbitmq -p 15672:15672 -p 5672:5672 -d -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=root  rabbitmq:3-management
+```
+
+```bash
+To use nestjs CLI run: $ npm i -g @nestjs/cli
+To use typeorm CLI run: $ npm i -g typeorm
+```
 ## Installation
 
 ```bash
 $ npm install
+$ npm run typeorm:run
 ```
+
+## Debug
+[Example](https://github.com/nestjs/nest/issues/993#issuecomment-461189430) 
+##### WebStorm
+```
+1) Click on 'Add Configuration' on top bar
+2) Click '+' and select 'Attach to Node.js/Chrome'
+3) Name it whatever you want
+4) In 'Before script' area click '+' and select 'run npm script' and select run start:debug
+5) Save and run in a debug mode 
+```
+
+## Migrations
+The project uses [TypeOrm](https://typeorm.io)\
+[Docs about migration](https://typeorm.io/#/migrations/)\
+All migrations stored in /migrations folder
+```bash
+Create new migration: $ typeorm migration:create -n PostRefactoring
+Run all unapplied migrations: $ npm run typeorm:run
+Revert last migration: $ npm run typeorm:revert
+```
+
+## Module structure
+- Controller (Responses for receive and response to HTTP requests. No business logic here)
+- Service (All business logic happens here)
+- Repository (All requests to database)
+- Model (Declaration of database field and its relations)
+- Interfaces (All interfaces. Name of each interface should start with a name of its module and ends with Dto)
+- Module (NestJS Module) 
 
 ## Running the app
 
@@ -59,17 +79,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).

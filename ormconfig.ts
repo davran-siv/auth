@@ -1,4 +1,6 @@
 // This file needs for TypeORM CLI like running/reverting migrations
+import { SnakeNamingStrategy } from './src/shared/repository/snake-naming-steategy'
+
 const type: any = 'postgres'
 
 const typeormConfig = {
@@ -16,6 +18,7 @@ const typeormConfig = {
   cli: {
     migrationsDir: 'migrations',
   },
+  namingStrategy: new SnakeNamingStrategy(),
 }
 // export default breaks migrations https://github.com/typeorm/typeorm/issues/5003
 export = typeormConfig

@@ -1,4 +1,5 @@
 import { ConfigService } from '@nestjs/config'
+import { SnakeNamingStrategy } from './src/shared/repository/snake-naming-steategy'
 
 // This file needs for NestJS
 const type: any = 'postgres'
@@ -18,6 +19,7 @@ const typeormConfigAsync = (config: ConfigService) => ({
   cli: {
     migrationsDir: 'migrations',
   },
+  namingStrategy: new SnakeNamingStrategy(),
 })
 
 export default typeormConfigAsync

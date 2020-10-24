@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import typeormConfigAsync from '../ormconfig-async';
-import { controllers } from './controllers';
+import { ApiModule } from './api/api.module'
 import { domains } from './domains';
-import { UsersModule } from './impl/users/users.module';
+import { UserModule } from './impl/user/user.module';
 
 @Module({
   imports: [
@@ -13,12 +13,10 @@ import { UsersModule } from './impl/users/users.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: typeormConfigAsync,
-    }),
 
-    UsersModule,
-  ],
-  controllers: [
-    ...controllers,
+    }),
+    ApiModule,
+    UserModule,
   ],
   providers: [
     ...domains,
