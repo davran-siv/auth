@@ -6,6 +6,7 @@ import { ApiModule } from './api/api.module'
 import { UserDomainModule } from './domains/user/user.domain-module'
 import { WebhookDomainModule } from './domains/webhook/webhook.domain-module'
 import { UserImplModule } from './impl/user/user.impl-module'
+import { RpcModule } from './rpc/rpc.module'
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserImplModule } from './impl/user/user.impl-module'
     UserImplModule,
     UserDomainModule,
     WebhookDomainModule,
+    RpcModule,
   ],
   providers: [],
 })

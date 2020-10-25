@@ -11,7 +11,7 @@ Nest DDD and CQRS boilerplate
 ### Add postgres docker container
 ```bash
 $ docker run --name postgres -p5432:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_DB=payform -e POSTGRES_USER=root -d postgres:11.5
-$ docker run --name rabbitmq -p 15672:15672 -p 5672:5672 -d -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=root  rabbitmq:3-management
+$ docker run -d --rm --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=root rabbitmq:3-management
 ```
 
 ```bash

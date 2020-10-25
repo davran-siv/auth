@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { Connection, EntityManager } from 'typeorm'
 import { UserCreateRequestMapper } from '../../api/user/user.mapper'
 import { httpExceptionMessages } from '../../consts/httpExceptionMessages'
-import { UserEntity } from '../../impl/user/user.entity'
 import { UserService } from '../../impl/user/user.service'
+import { UserPublisher } from '../../rpc/user/user.publisher'
 import {
   commitTransaction,
   releaseTransaction,
@@ -17,13 +17,21 @@ export class UserDomain {
   constructor(
     private usersService: UserService,
     private connection: Connection,
+    private userPublisher: UserPublisher
   ) {}
 
   async createOne(dto: UserCreateRequestMapper, entityManager?: EntityManager): Promise<UserDto> {
+    const mock = {
+      id: "adwawd",
+      email: "awd",
+      firstName: "dd",
+      lastName: "dd"
+    }
     const { manager, queryRunner } = await startTransaction(this.connection, entityManager)
     try {
       const createdUser = await this.usersService.createOne(dto, manager)
       await commitTransaction(queryRunner)
+      await this.userPublisher.publishUserCreatedMessage({id: mock.id})
       return this.getOneById(createdUser.id)
     } catch (err) {
       return await rollbackTransactionAndThrowError(queryRunner, err)
