@@ -29,10 +29,11 @@ export class UserDomain {
     }
     const { manager, queryRunner } = await startTransaction(this.connection, entityManager)
     try {
-      const createdUser = await this.usersService.createOne(dto, manager)
+      // const createdUser = await this.usersService.createOne(dto, manager)
       await commitTransaction(queryRunner)
       await this.userPublisher.publishUserCreatedMessage({id: mock.id})
-      return this.getOneById(createdUser.id)
+      return mock as UserDto
+      // return this.getOneById(createdUser.id)
     } catch (err) {
       return await rollbackTransactionAndThrowError(queryRunner, err)
     } finally {
