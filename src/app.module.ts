@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import typeormConfigAsync from '../ormconfig-async';
+import { Module } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import typeormConfigAsync from '../ormconfig-async'
 import { ApiModule } from './api/api.module'
-import { domains } from './domains';
-import { UserModule } from './impl/user/user.module';
+import { UserDomainModule } from './domains/user/user.domain-module'
+import { WebhookDomainModule } from './domains/webhook/webhook.domain-module'
+import { UserImplModule } from './impl/user/user.impl-module'
 
 @Module({
   imports: [
@@ -13,13 +14,12 @@ import { UserModule } from './impl/user/user.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: typeormConfigAsync,
-
     }),
     ApiModule,
-    UserModule,
+    UserImplModule,
+    UserDomainModule,
+    WebhookDomainModule,
   ],
-  providers: [
-    ...domains,
-  ],
+  providers: [],
 })
 export class AppModule {}

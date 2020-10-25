@@ -19,16 +19,17 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm:drop": "ts-node ../../node_modules/typeorm/cli.js schema:drop",
-    "typeorm:run": "npm run build && ts-node ../../node_modules/typeorm/cli.js migration:run",
-    "typeorm:revert": "npm run build && ts-node ../../node_modules/typeorm/cli.js migration:revert",
-    "typeorm:create": "npm run build && ts-node ../../node_modules/typeorm/cli.js migration:create"
+    "typeorm:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
+    "typeorm:run": "npm run build && ts-node ./node_modules/typeorm/cli.js migration:run",
+    "typeorm:revert": "npm run build && ts-node ./node_modules/typeorm/cli.js migration:revert",
+    "typeorm:create": "npm run build && ts-node ./node_modules/typeorm/cli.js migration:create"
   },
   "dependencies": {
     "@nestjs/common": "^7.4.4",
     "@nestjs/config": "^0.5.0",
     "@nestjs/core": "^7.4.4",
     "@nestjs/cqrs": "^7.0.1",
+    "@nestjs/microservices": "^7.4.4",
     "@nestjs/platform-express": "^7.4.4",
     "@nestjs/swagger": "^4.6.1",
     "@nestjs/typeorm": "^7.1.4",

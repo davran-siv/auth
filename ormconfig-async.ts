@@ -8,9 +8,9 @@ const typeormConfigAsync = (config: ConfigService) => ({
   type,
   host: config.get('PG_HOST'),
   port: 5432,
-  username: config.get('PG_USER_NEXT'),
-  password: config.get('PG_PASSWORD_NEXT'),
-  database: config.get('NODE_ENV') === 'test' ? 'test_payform' : config.get('PG_DATABASE_NEXT'),
+  username: config.get('PG_USER'),
+  password: config.get('PG_PASSWORD'),
+  database: config.get('NODE_ENV') === 'test' ? 'test_payform' : config.get('PG_DATABASE'),
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
   synchronize: false,
@@ -19,7 +19,6 @@ const typeormConfigAsync = (config: ConfigService) => ({
   cli: {
     migrationsDir: 'migrations',
   },
-  namingStrategy: new SnakeNamingStrategy(),
 })
 
 export default typeormConfigAsync

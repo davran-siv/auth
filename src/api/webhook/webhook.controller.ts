@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
-import { WebhookDomain } from '../../domains/webhook/webhooks.domain'
+import { WebhookDomain } from '../../domains/webhook/webhook.domain'
 
 @Controller()
 export class WebhookController {
