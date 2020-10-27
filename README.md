@@ -11,7 +11,7 @@ Nest DDD and CQRS boilerplate
 ### Add postgres docker container
 ```bash
 $ docker run --name postgres -p5432:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_DB=payform -e POSTGRES_USER=root -d postgres:11.5
-$ docker run -d --rm --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=root rabbitmq:3-management
+$ docker run -d --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=root rabbitmq:3-management
 ```
 
 ```bash
@@ -38,21 +38,17 @@ $ npm run typeorm:run
 
 ## Migrations
 The project uses [TypeOrm](https://typeorm.io)\
-[Docs about migration](https://typeorm.io/#/migrations/)\
-All migrations stored in /migrations folder
+[Docs about migration](https://typeorm.io/#/migrations/) \
+All migrations stored in the `/migrations` folder
 ```bash
-Create new migration: $ typeorm migration:create -n PostRefactoring
+Create new migration: $ typeorm migration:create -n InitUserTable
 Run all unapplied migrations: $ npm run typeorm:run
 Revert last migration: $ npm run typeorm:revert
+Drop database. Be carefull, it could not be reverted: $ npm run typeorm:drop
 ```
 
 ## Module structure
-- Controller (Responses for receive and response to HTTP requests. No business logic here)
-- Service (All business logic happens here)
-- Repository (All requests to database)
-- Model (Declaration of database field and its relations)
-- Interfaces (All interfaces. Name of each interface should start with a name of its module and ends with Dto)
-- Module (NestJS Module) 
+// TODO 
 
 ## Running the app
 
@@ -79,3 +75,9 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Useful links
+[RabbitMQ exchange types](https://lostechies.com/derekgreer/2012/03/28/rabbitmq-for-windows-exchange-types/) \
+[Re-routing messages with delay in rabbitmq](https://medium.com/nmc-techblog/re-routing-messages-with-delay-in-rabbitmq-4a52185f5098)  
+[RabbitMQ Tutorials](https://www.rabbitmq.com/getstarted.html) \
+[Package we use ti work with  rabbitmq](https://github.com/golevelup/nestjs/tree/master/packages/rabbitmq)

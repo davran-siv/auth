@@ -19,6 +19,5 @@ export class WebhookDomain {
 
   async send() {
     console.log('webhook sent')
-    throw new Error()
   }
 }
