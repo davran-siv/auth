@@ -80,4 +80,4 @@ $ npm run test:cov
 [RabbitMQ exchange types](https://lostechies.com/derekgreer/2012/03/28/rabbitmq-for-windows-exchange-types/) \
 [Re-routing messages with delay in rabbitmq](https://medium.com/nmc-techblog/re-routing-messages-with-delay-in-rabbitmq-4a52185f5098)  
 [RabbitMQ Tutorials](https://www.rabbitmq.com/getstarted.html) \
-[Package we use ti work with  rabbitmq](https://github.com/golevelup/nestjs/tree/master/packages/rabbitmq)
+[Package we use to work with  rabbitmq](https://github.com/golevelup/nestjs/tree/master/packages/rabbitmq)
