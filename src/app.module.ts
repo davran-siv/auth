@@ -7,6 +7,7 @@ import { UserDomainModule } from './domains/user/user.domain-module'
 import { WebhookDomainModule } from './domains/webhook/webhook.domain-module'
 import { UserImplModule } from './impl/user/user.impl-module'
 import { RpcModule } from './rpc/rpc.module'
+import { LoggerModule } from './shared/logger/logger.module'
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { RpcModule } from './rpc/rpc.module'
     UserDomainModule,
     WebhookDomainModule,
     RpcModule,
+    LoggerModule,
   ],
   providers: [],
 })

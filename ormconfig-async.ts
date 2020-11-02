@@ -1,5 +1,6 @@
 import { ConfigService } from '@nestjs/config'
 import { SnakeNamingStrategy } from './src/shared/repository/snake-naming-steategy'
+import { TypeOrmLoggerContainer } from './src/shared/repository/type-orm-logger-container'
 
 // This file needs for NestJS
 const type: any = 'postgres'
@@ -19,6 +20,10 @@ const typeormConfigAsync = (config: ConfigService) => ({
   cli: {
     migrationsDir: 'migrations',
   },
+  logger: TypeOrmLoggerContainer.ForConnection(
+    'default',
+    config.get("TYPEORM_LOGGING")!,
+  )
 })
 
 export default typeormConfigAsync
